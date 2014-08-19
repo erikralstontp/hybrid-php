@@ -1,4 +1,4 @@
-
+$nav-color = $blue
 
 nav
   subNavHeight = 55px
@@ -8,21 +8,22 @@ nav
   itemWidth = auto
 
   display block
-  width:100%
-  height:navHeight
+  width: 100%
+  height: navHeight
   padding 0 0 0 0
   position fixed
-  top:0
-  background $red
-  animation-duration: 15s;
-  animation-name: colorCycle;
-  animation-iteration-count: infinite;
+  top: 0
+  animation-duration: 15s
+  animation-name: colorCycle
+  animation-iteration-count: infinite
+  background: $nav-color
 
   .submenu-bar
     height: subNavHeight
     background: white
     width: 100%
-    margin-top:navHeight
+    margin-top: navHeight
+    box-shadow: 0 0 12px rgba(0, 0, 0, 0.5)
 
   div
 
@@ -31,31 +32,40 @@ nav
       > li
         line-height: navHeight
         text-align center
-        letter-spacing:-2.2pt
+        letter-spacing: -2.2pt
+        color: #fff;
 
       li
-        padding:0px 10px 0px 10px
-        float:left
-        font-size:fontSize
-        height:navHeight
-        color:#eaeaea
-        font-weight:200
-        text-transform:uppercase
+        padding: 0px 20px
+        float: left
+        font-size: fontSize
+        height: navHeight
+        font-weight: 300
+        text-transform: uppercase
         width: itemWidth
-        cursor:pointer
-        position:relative
-        transition: border .3s
+        cursor: pointer
+        position: relative
+        transition: border .2s
+        border-bottom: 0px white solid
 
+        &:hover
+          border-bottom: 12px white solid
 
         &.active
-          border-bottom:12px #ffffff solid
+          color: $nav-color
+          background: white
 
+          &:hover
+            border-bottom: none
 
+          span
+            color: $nav-color
+            cursor: pointer
 
-        a , span
-          text-decoration:none
-          color:white
-          cursor:pointer
+        a
+          text-decoration: none
+          color: white
+          cursor: pointer
 
         > div
           position: fixed
@@ -64,30 +74,28 @@ nav
           width: 100%
           visibility hidden
           opacity 0
+          border-bottom: 2px $orange solid
 
           > ul
 
-
-
-
-
-
-
             > li
-              width:itemWidth
-              font-size:subFontSize
-              height:subNavHeight
-              text-align:center
-              font-weight:200
-              float:left
-              line-height:subNavHeight
+              width: itemWidth
+              font-size: subFontSize
+              height: subNavHeight
+              text-align: center
+              font-weight: 400
+              float: left
+              line-height: subNavHeight
               letter-spacing 0pt
-              transition:border .3s
-              a , span
-                color:black
+              transition: border .2s
+              border-bottom: 1px white solid
 
-              &.active
-                border-bottom:12px #333333 solid
+              a
+                color: $nav-color
 
+              &:hover
+                border-bottom: 12px shade($orange, 15%) solid
 
-
+              &.active,
+              &.active:hover
+                border-bottom: 12px $orange solid

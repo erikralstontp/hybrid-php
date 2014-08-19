@@ -1,48 +1,95 @@
-
 {% extends ajax == false ? "_main.twig" : "../../_ajax.twig" %}
 
 {% block content %}
 
 
-<h1>SETUP</h1>
-<h3>Hosts</h3>
+  <h1>SETUP</h1>
+  <h3>Hosts</h3>
 
-<p>Add this to your hosts file</p>
-<p><b>Note</b> - You can use any hostname you want. Just be sure to set it in the manifest.json</p>
-<pre><code> 127.0.0.1 local.hybrid-php.com</code></pre>
-<h3>Apache Vhost</h3>
-<p>Add this to your vhosts configuration (httpd.conf)</p>
-<pre>
+  <p>Add this to your hosts file</p>
+  <p><b>Note</b> - You can use any hostname you want. Just be sure to set it
+    in the manifest.json</p>
+  <pre>
+    <code> 127.0.0.1 local.hybrid-php.com</code>
+  </pre>
+  <h3>Apache Vhost</h3>
+  <p>Add this to your vhosts configuration (httpd.conf)</p>
+  <pre>
     <code>
-    &#x3C;Directory &#x22;absolute_path_to_project/app&#x22;&#x3E;
-        Options Indexes FollowSymLinks
-        AllowOverride all
-        Order allow,deny
-        Allow from all
-        Require all granted
-    &#x3C;/Directory&#x3E;
+      &#x3C;Directory &#x22;absolute_path_to_project/app&#x22;&#x3E;
+          Options Indexes FollowSymLinks
+          AllowOverride all
+          Order allow,deny
+          Allow from all
+          Require all granted
+      &#x3C;/Directory&#x3E;
 
-    &#x3C;VirtualHost 127.0.0.1:80&#x3E;
+      &#x3C;VirtualHost 127.0.0.1:80&#x3E;
         ServerName local.hybrid-php.com
         DocumentRoot &#x22;absolute_path_to_project/app&#x22;
-    &#x3C;/VirtualHost&#x3E;
+      &#x3C;/VirtualHost&#x3E;
     </code>
-</pre>
+  </pre>
 
-<h3>Initialization</h3>
-<p>Install composer dependencies - <a href="https://getcomposer.org/download/" target="_blank">download composer from here</a></p>
-<pre><code>composer install</code></pre>
-<p>Install npm packages</p>
-<pre><code>npm install</code></pre>
-<p>Install bower packages</p>
-<pre><code>bower install</code></pre>
-<h3>Commands</h3>
-<p>Copy bower packages to source directory</p>
-<pre><code>grunt bower</code></pre>
-<p>Run grunt in development mode</p>
-<pre><code>grunt | grunt dev</code></pre>
-<p>Run grunt to create a distribution</p>
-<pre><code>grunt dist</code></pre>
+  <h3>VHost Config for MAMP</h3>
+  <ul class="plain-list">
+    <li>Make sure <b>httpd-vhosts.conf</b> is included in your configuration file:
+      <ul>
+        <li>
+          In <b>/Applications/MAMP/conf/apache/httpd.conf</b>, search for "Virtual hosts" and unccomment the line <b>Include /Applications/MAMP/conf/apache/extra/httpd-vhosts.conf</b>
+        </li>
+      </ul>
+    </li>
+    <li>
+      Then add the following to <b>/Applications/MAMP/conf/apache/extra/httpd-vhosts.conf</b>:
+    </li>
+  </ul>
+
+  <pre>
+    <code>
+      &#x3C;VirtualHost *&#x3E;
+          DocumentRoot "/Applications/MAMP/htdocs"
+          ServerName localhost
+      &#x3C;/VirtualHost>
+
+      &#x3C;VirtualHost *&#x3E;
+          DocumentRoot "/path_to_project/app"
+          ServerName local.hybrid-php.com
+      &#x3C;/VirtualHost&#x3E;
+    </code>
+  </pre>
+
+  <p>
+    <b>*NOTE:</b> The first entry above is to maintain the reference to your default localhost location set by MAMP
+  </p>
+
+  <h3>Initialization</h3>
+  <p>Install composer dependencies -
+    <a href="https://getcomposer.org/download/" target="_blank">download composer from here</a></p>
+  <pre>
+    <code>composer install</code>
+  </pre>
+  <p>Install npm packages</p>
+  <pre>
+    <code>npm install</code>
+  </pre>
+  <p>Install bower packages</p>
+  <pre>
+    <code>bower install</code>
+  </pre>
+  <h3>Commands</h3>
+  <p>Copy bower packages to source directory</p>
+  <pre>
+    <code>grunt bower</code>
+  </pre>
+  <p>Run grunt in development mode</p>
+  <pre>
+    <code>grunt | grunt dev</code>
+  </pre>
+  <p>Run grunt to create a distribution</p>
+  <pre>
+    <code>grunt dist</code>
+  </pre>
 
 
 {% endblock %}
